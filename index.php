@@ -29,7 +29,7 @@
 		<br>
 
 		<form method="post" enctype="multipart/form-data">
-			Create Post! <input type="text" name="createpost">
+			Create Post! <input type="text" name="text">
 			<br>
 			<br>
 			<label for="category">Select Post Category! </label>
@@ -40,15 +40,12 @@
 			<br>
 			<br>
 
-  		<!--Select image to upload:
-  		<input type="file" name="image">
-  		<input type="submit" value="Upload" name="image">
-
+			Select A Photo! <input type="file" name="image">
 			<br>
 			<br>
-			-->
 
-  		<input type="submit">
+			<!-- the input button below is to finally/completely submit the post -->
+  		<input type="submit" name="createpost" value="Submit Post">
 		</form>
 
 		<br>
@@ -94,11 +91,24 @@
 				}
 			}
 			if (isset($_POST['createpost'])) {
-				$fixed = str_replace("'", "''", $_POST['createpost']);
+				$fixed = str_replace("'", "''", $_POST['text']);
 				if (isset($_POST['category'])) {
 					$postcategory = $_POST['category'];
 					if ($postcategory == "covid") {
-						$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', NULL, NULL);";
+
+						if (empty($_FILES['image']['name'])) {
+							$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', NULL, NULL);";
+						}
+						else {
+							$image = str_replace("'", "''", $_FILES['image']['name']);
+
+							$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', '$image', NULL);";
+
+							$dest_dir = "uploads/";
+							$dest_file = $dest_dir . basename($_FILES['image']['name']);
+
+							move_uploaded_file($_FILES['image']['tmp_name'], $dest_file);
+						}
 
 						$sqlselect = "SELECT * FROM covid;";
 
@@ -122,7 +132,20 @@
 						}
 					}
 					if ($postcategory == "fun") {
-						$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', NULL);";
+
+						if (empty($_FILES['image']['name'])) {
+							$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', NULL);";
+						}
+						else {
+							$image = str_replace("'", "''", $_FILES['image']['name']);
+
+							$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', '$image');";
+
+							$dest_dir = "uploads/";
+							$dest_file = $dest_dir . basename($_FILES['image']['name']);
+
+							move_uploaded_file($_FILES['image']['tmp_name'], $dest_file);
+						}
 
 						$sqlselect = "SELECT * FROM fun;";
 
