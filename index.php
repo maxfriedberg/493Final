@@ -35,32 +35,15 @@
 
 		<?php
 
-			if (isset($_POST['createpost'])) {
-				$fixed = str_replace("'", "''", $_POST['createpost']);
-				if (isset($_POST['category'])) {
-					$postcategory = $_POST['category'];
-					if ($postcategory == "covid") {
-						$sql = "INSERT INTO covid (text, image, location) VALUES ('$fixed', NULL, NULL);";
-					}
-					if ($postcategory == "fun") {
-						$sql = "INSERT INTO fun (text, image) VALUES ('$fixed', NULL);";
-					}
-					mysqli_query($dbconnection, $sql);
-				}
-			}
-
-		?>
-
-		<?php
 			if (isset($_POST['selectcovidbutton'])) {
-					$sql = "SELECT * FROM covid;";
-					$selected_posts = mysqli_query($dbconnection, $sql);
+				$sql = "SELECT * FROM covid;";
+				$selected_posts = mysqli_query($dbconnection, $sql);
 
-					if (mysqli_num_rows($selected_posts) > 0) {
-						while($single_post = mysqli_fetch_assoc($selected_posts)) {
-							echo $single_post['text'] . "<br>";
-						}
-				  }
+				if (mysqli_num_rows($selected_posts) > 0) {
+					while($single_post = mysqli_fetch_assoc($selected_posts)) {
+						echo $single_post['text'] . "<br>";
+					}
+				}
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sql = "SELECT * FROM fun;";
@@ -72,6 +55,43 @@
 					}
 				}
 			}
+			if (isset($_POST['createpost'])) {
+				$fixed = str_replace("'", "''", $_POST['createpost']);
+				if (isset($_POST['category'])) {
+					$postcategory = $_POST['category'];
+					if ($postcategory == "covid") {
+						$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', NULL, NULL);";
+
+						$sqlselect = "SELECT * FROM covid;";
+
+						mysqli_query($dbconnection, $sqlinsert);
+
+						$selected_posts = mysqli_query($dbconnection, $sqlselect);
+
+						if (mysqli_num_rows($selected_posts) > 0) {
+							while($single_post = mysqli_fetch_assoc($selected_posts)) {
+								echo $single_post['text'] . "<br>";
+							}
+						}
+					}
+					if ($postcategory == "fun") {
+						$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', NULL);";
+
+						$sqlselect = "SELECT * FROM fun;";
+
+						mysqli_query($dbconnection, $sqlinsert);
+						
+						$selected_posts = mysqli_query($dbconnection, $sqlselect);
+
+						if (mysqli_num_rows($selected_posts) > 0) {
+							while($single_post = mysqli_fetch_assoc($selected_posts)) {
+								echo $single_post['text'] . "<br>";
+							}
+						}
+					}
+				}
+			}
+
 		?>
 
 	</body>
