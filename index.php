@@ -90,7 +90,7 @@
 					}
 				}
 			}
-			if (isset($_POST['createpost'])) {
+			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);
 				if (isset($_POST['category'])) {
 					$postcategory = $_POST['category'];
@@ -165,6 +165,53 @@
 									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 									echo $single_post['text'] . "<br>";
 								}
+							}
+						}
+					}
+				}
+			}
+			elseif (empty($_POST['text']) && isset($_POST['createpost'])) {
+
+				echo "<b> Error: Text is required to post</b><br><br>";
+
+				$postcategory = $_POST['category'];
+
+				if ($postcategory == "covid") {
+					$sqlselect = "SELECT * FROM covid;";
+
+					$selected_posts = mysqli_query($dbconnection, $sqlselect);
+
+					if (mysqli_num_rows($selected_posts) > 0) {
+						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+							if (is_null($single_post['image'])) {
+								//original, text only echo code
+								echo $single_post['text'] . "<br>";
+							}
+							else {
+								//image echo code, followed by: . "<br>";
+								//followed by: original, text only echo code (above)
+								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+								echo $single_post['text'] . "<br>";
+							}
+						}
+					}
+				}
+				if ($postcategory == "fun") {
+					$sqlselect = "SELECT * FROM fun;";
+
+					$selected_posts = mysqli_query($dbconnection, $sqlselect);
+
+					if (mysqli_num_rows($selected_posts) > 0) {
+						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+							if (is_null($single_post['image'])) {
+								//original, text only echo code
+								echo $single_post['text'] . "<br>";
+							}
+							else {
+								//image echo code, followed by: . "<br>";
+								//followed by: original, text only echo code (above)
+								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+								echo $single_post['text'] . "<br>";
 							}
 						}
 					}
