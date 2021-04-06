@@ -6,6 +6,15 @@
 <html>
 	<head>
 		<title>TEST</title>
+
+		<style>
+			img {
+				width: 300px;
+				height: 200px;
+				object-fit: cover;
+			}
+		</style>
+
 	</head>
 	<body style="text-align:center">
 
@@ -19,7 +28,7 @@
 
 		<br>
 
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			Create Post! <input type="text" name="createpost">
 			<br>
 			<br>
@@ -28,6 +37,17 @@
     		<option value="covid">COVID</option>
     		<option value="fun">FUN</option>
   		</select>
+			<br>
+			<br>
+
+  		<!--Select image to upload:
+  		<input type="file" name="image">
+  		<input type="submit" value="Upload" name="image">
+
+			<br>
+			<br>
+			-->
+
   		<input type="submit">
 		</form>
 
@@ -40,8 +60,17 @@
 				$selected_posts = mysqli_query($dbconnection, $sql);
 
 				if (mysqli_num_rows($selected_posts) > 0) {
-					while($single_post = mysqli_fetch_assoc($selected_posts)) {
-						echo $single_post['text'] . "<br>";
+					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+						if (is_null($single_post['image'])) {
+							//original, text only echo code
+							echo $single_post['text'] . "<br>";
+						}
+						else {
+							//image echo code, followed by: . "<br>";
+							//followed by: original, text only echo code (above)
+							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+							echo $single_post['text'] . "<br>";
+						}
 					}
 				}
 			}
@@ -50,8 +79,17 @@
 				$selected_posts = mysqli_query($dbconnection, $sql);
 
 				if (mysqli_num_rows($selected_posts) > 0) {
-					while($single_post = mysqli_fetch_assoc($selected_posts)) {
-						echo $single_post['text'] . "<br>";
+					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+						if (is_null($single_post['image'])) {
+							//original, text only echo code
+							echo $single_post['text'] . "<br>";
+						}
+						else {
+							//image echo code, followed by: . "<br>";
+							//followed by: original, text only echo code (above)
+							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+							echo $single_post['text'] . "<br>";
+						}
 					}
 				}
 			}
@@ -69,8 +107,17 @@
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
 
 						if (mysqli_num_rows($selected_posts) > 0) {
-							while($single_post = mysqli_fetch_assoc($selected_posts)) {
-								echo $single_post['text'] . "<br>";
+							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+								if (is_null($single_post['image'])) {
+									//original, text only echo code
+									echo $single_post['text'] . "<br>";
+								}
+								else {
+									//image echo code, followed by: . "<br>";
+									//followed by: original, text only echo code (above)
+									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+									echo $single_post['text'] . "<br>";
+								}
 							}
 						}
 					}
@@ -80,12 +127,21 @@
 						$sqlselect = "SELECT * FROM fun;";
 
 						mysqli_query($dbconnection, $sqlinsert);
-						
+
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
 
 						if (mysqli_num_rows($selected_posts) > 0) {
-							while($single_post = mysqli_fetch_assoc($selected_posts)) {
-								echo $single_post['text'] . "<br>";
+							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
+								if (is_null($single_post['image'])) {
+									//original, text only echo code
+									echo $single_post['text'] . "<br>";
+								}
+								else {
+									//image echo code, followed by: . "<br>";
+									//followed by: original, text only echo code (above)
+									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+									echo $single_post['text'] . "<br>";
+								}
 							}
 						}
 					}
