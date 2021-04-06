@@ -9,8 +9,8 @@
 
 		<style>
 			img {
-				width: 300px;
-				height: 200px;
+				width: 450px;
+				height: 300px;
 				object-fit: cover;
 			}
 		</style>
