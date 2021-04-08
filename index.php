@@ -13,6 +13,10 @@
 				height: 300px;
 				object-fit: cover;
 			}
+
+			.intextalign * {
+				vertical-align: middle;
+			}
 		</style>
 
 	</head>
@@ -20,29 +24,32 @@
 
 		<form method="post">
         <input type="submit" name="selectcovidbutton"
-                value="COVID"/>
-
+                value="COVID-Related"/>
+								Choose what posts you want to see!
         <input type="submit" name="selectfunbutton"
-                value="FUN"/>
+                value="Fun Posts"/>
     </form>
 
 		<br>
 
 		<form method="post" enctype="multipart/form-data">
-			Create Post! <input type="text" name="text">
+			Create Your Own Post!
+			<!-- <input type="text" name="text"> -->
 			<br>
 			<br>
-			<label for="category">Select Post Category! </label>
+			<label for="category">Select Post Category </label>
 			<select id="category" name="category">
-    		<option value="covid">COVID</option>
-    		<option value="fun">FUN</option>
+    		<option value="covid">COVID-Related</option>
+    		<option value="fun">Fun Posts</option>
   		</select>
-			<br>
+
+			Select Photo <input type="file" name="image">
 			<br>
 
-			Select A Photo! <input type="file" name="image">
-			<br>
-			<br>
+			<p class="intextalign">
+  			<label for="textarea">Add Text </label>
+  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
+			</p>
 
 			<!-- the input button below is to finally/completely submit the post -->
   		<input type="submit" name="createpost" value="Submit Post">
@@ -91,8 +98,16 @@
 				}
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
+				if (!empty($_FILES['image']['name'])) {
+					global $dir, $target, $size, $fileType, $badUpload;
+					$dir = "uploads/";
+					$target = $dir . basename($_FILES['image']['name']);
+					$size = $_FILES["image"]["size"];
+					$fileType = strtolower(pathinfo($target,PATHINFO_EXTENSION));
+				}
 				$fixed = str_replace("'", "''", $_POST['text']);
-				if (isset($_POST['category'])) {
+				if (isset($_POST['category']) && $size <= 3000000 && ($fileType == "jpg" ||
+				$fileType == "png" || $fileType == "jpeg" || $fileType == "gif")) {
 					$postcategory = $_POST['category'];
 					if ($postcategory == "covid") {
 
@@ -168,6 +183,13 @@
 							}
 						}
 					}
+				}
+				if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "gif") {
+					echo "<b> Error: Invalid File (Only JPG, JPEG, PNG, GIF Supported)</b><br><br>";
+
+				}
+				if ($size > 3000000) {
+					echo "<b> Error: File Must Be Less Than 3MB";
 				}
 			}
 			elseif (empty($_POST['text']) && isset($_POST['createpost'])) {
