@@ -7,27 +7,17 @@
 	<head>
 		<title>TEST</title>
 
-		<style>
-			img {
-				width: 450px;
-				height: 300px;
-				object-fit: cover;
-			}
-
-			.intextalign * {
-				vertical-align: middle;
-			}
-		</style>
+		<link rel="stylesheet" href="style.css">
 
 	</head>
 	<body style="text-align:center">
 
 		<form method="post">
         <input type="submit" name="selectcovidbutton"
-                value="COVID-Related"/>
+                value="COVID-Related" class="selectorbutton"/>
 								Choose what posts you want to see!
         <input type="submit" name="selectfunbutton"
-                value="Fun Posts"/>
+                value="Fun Posts" class="selectorbutton"/>
     </form>
 
 		<br>
