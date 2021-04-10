@@ -15,6 +15,7 @@
 
 		<div class="navbar">
 			<form method="post">
+				<span class="navbarsitename">Forum/Imageboard Name (UM Community Site)</span><br>
 	        <input type="submit" name="selectcovidbutton"
 	                value="COVID-Related" class="selectorbutton"/>
 									<span class="navbarselectortext">

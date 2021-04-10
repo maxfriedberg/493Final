@@ -5,15 +5,15 @@
 
 .navbar {
   position: fixed;
+  text-align: center;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   height: 62px;
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
+  width: 920px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #000080;
   color: white;
   z-index: 1;
@@ -24,15 +24,26 @@
   background-color: #000080;
   border: 5px solid #FFFF00;
   color: white;
-  padding: 13px 28px;
+  padding: 7px 13px;
   text-align: center;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   font-family: Helvetica, sans-serif;
   margin: 3px 1px;
+  margin-top: 13px;
+  margin-left: 20px;
+  margin-right: 20px;
   cursor: pointer;
   outline: 1px solid black;
+  z-index: 2;
+}
+
+.navbarsitename {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
   z-index: 2;
 }
 
@@ -40,14 +51,13 @@
   padding-left: 10px;
   padding-right: 10px;
   font-family: Helvetica, sans-serif;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 16px;
   vertical-align: middle;
   z-index: 2;
 }
 
 .createpostform {
-  margin-top: 75px;
+  margin-top: 95px;
 }
 
 .intextalign * {
