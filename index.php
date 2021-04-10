@@ -1,5 +1,6 @@
 <?php
 	include_once 'connectdb.php';
+	include_once 'helpers.php';
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +42,7 @@
 	  			<label for="textarea">Add Text </label>
 	  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
 				</p>
-
-				<!-- the input button below is to finally/completely submit the post -->
+				
 	  		<input type="submit" name="createpost" value="Submit Post">
 			</form>
 		</div>
@@ -58,12 +58,9 @@
 				if (mysqli_num_rows($selected_posts) > 0) {
 					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 						if (is_null($single_post['image'])) {
-							//original, text only echo code
 							echo $single_post['text'] . "<br>";
 						}
 						else {
-							//image echo code, followed by: . "<br>";
-							//followed by: original, text only echo code (above)
 							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 							echo $single_post['text'] . "<br>";
 						}
@@ -77,12 +74,9 @@
 				if (mysqli_num_rows($selected_posts) > 0) {
 					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 						if (is_null($single_post['image'])) {
-							//original, text only echo code
 							echo $single_post['text'] . "<br>";
 						}
 						else {
-							//image echo code, followed by: . "<br>";
-							//followed by: original, text only echo code (above)
 							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 							echo $single_post['text'] . "<br>";
 						}
@@ -96,34 +90,24 @@
 					if ($postcategory == "covid") {
 
 						if (empty($_FILES['image']['name'])) {
-							$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', NULL, NULL);";
+							postUpload($postcategory, FALSE, $fixed, $dbconnection, "nostring", "nostring", "nostring");
 						}
 						else {
 							$image = str_replace("'", "''", $_FILES['image']['name']);
-
-							$sqlinsert = "INSERT INTO covid (text, image, location) VALUES ('$fixed', '$image', NULL);";
-
-							$dest_dir = "uploads/";
-							$dest_file = $dest_dir . basename($_FILES['image']['name']);
-
-							move_uploaded_file($_FILES['image']['tmp_name'], $dest_file);
+							$dest_file = "uploads/" . basename($_FILES['image']['name']);
+							postUpload($postcategory, TRUE, $fixed, $dbconnection, $image, $dest_file, $_FILES['image']['tmp_name']);
 						}
 
 						$sqlselect = "SELECT * FROM covid;";
-
-						mysqli_query($dbconnection, $sqlinsert);
 
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
 
 						if (mysqli_num_rows($selected_posts) > 0) {
 							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 								if (is_null($single_post['image'])) {
-									//original, text only echo code
 									echo $single_post['text'] . "<br>";
 								}
 								else {
-									//image echo code, followed by: . "<br>";
-									//followed by: original, text only echo code (above)
 									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 									echo $single_post['text'] . "<br>";
 								}
@@ -133,34 +117,24 @@
 					if ($postcategory == "fun") {
 
 						if (empty($_FILES['image']['name'])) {
-							$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', NULL);";
+							postUpload($postcategory, FALSE, $fixed, $dbconnection, "nostring", "nostring", "nostring");
 						}
 						else {
 							$image = str_replace("'", "''", $_FILES['image']['name']);
-
-							$sqlinsert = "INSERT INTO fun (text, image) VALUES ('$fixed', '$image');";
-
-							$dest_dir = "uploads/";
-							$dest_file = $dest_dir . basename($_FILES['image']['name']);
-
-							move_uploaded_file($_FILES['image']['tmp_name'], $dest_file);
+							$dest_file = "uploads/" . basename($_FILES['image']['name']);
+							postUpload($postcategory, TRUE, $fixed, $dbconnection, $image, $dest_file, $_FILES['image']['tmp_name']);
 						}
 
 						$sqlselect = "SELECT * FROM fun;";
-
-						mysqli_query($dbconnection, $sqlinsert);
 
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
 
 						if (mysqli_num_rows($selected_posts) > 0) {
 							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 								if (is_null($single_post['image'])) {
-									//original, text only echo code
 									echo $single_post['text'] . "<br>";
 								}
 								else {
-									//image echo code, followed by: . "<br>";
-									//followed by: original, text only echo code (above)
 									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 									echo $single_post['text'] . "<br>";
 								}
@@ -183,12 +157,9 @@
 					if (mysqli_num_rows($selected_posts) > 0) {
 						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 							if (is_null($single_post['image'])) {
-								//original, text only echo code
 								echo $single_post['text'] . "<br>";
 							}
 							else {
-								//image echo code, followed by: . "<br>";
-								//followed by: original, text only echo code (above)
 								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 								echo $single_post['text'] . "<br>";
 							}
@@ -203,12 +174,9 @@
 					if (mysqli_num_rows($selected_posts) > 0) {
 						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
 							if (is_null($single_post['image'])) {
-								//original, text only echo code
 								echo $single_post['text'] . "<br>";
 							}
 							else {
-								//image echo code, followed by: . "<br>";
-								//followed by: original, text only echo code (above)
 								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
 								echo $single_post['text'] . "<br>";
 							}
