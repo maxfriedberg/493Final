@@ -42,7 +42,7 @@
 	  			<label for="textarea">Add Text </label>
 	  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
 				</p>
-				
+
 	  		<input type="submit" name="createpost" value="Submit Post">
 			</form>
 		</div>
@@ -54,34 +54,12 @@
 			if (isset($_POST['selectcovidbutton'])) {
 				$sql = "SELECT * FROM covid;";
 				$selected_posts = mysqli_query($dbconnection, $sql);
-
-				if (mysqli_num_rows($selected_posts) > 0) {
-					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-						if (is_null($single_post['image'])) {
-							echo $single_post['text'] . "<br>";
-						}
-						else {
-							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-							echo $single_post['text'] . "<br>";
-						}
-					}
-				}
+				postDownload($selected_posts);
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sql = "SELECT * FROM fun;";
 				$selected_posts = mysqli_query($dbconnection, $sql);
-
-				if (mysqli_num_rows($selected_posts) > 0) {
-					while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-						if (is_null($single_post['image'])) {
-							echo $single_post['text'] . "<br>";
-						}
-						else {
-							echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-							echo $single_post['text'] . "<br>";
-						}
-					}
-				}
+				postDownload($selected_posts);
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);
@@ -99,20 +77,8 @@
 						}
 
 						$sqlselect = "SELECT * FROM covid;";
-
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
-
-						if (mysqli_num_rows($selected_posts) > 0) {
-							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-								if (is_null($single_post['image'])) {
-									echo $single_post['text'] . "<br>";
-								}
-								else {
-									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-									echo $single_post['text'] . "<br>";
-								}
-							}
-						}
+						postDownload($selected_posts);
 					}
 					if ($postcategory == "fun") {
 
@@ -126,20 +92,8 @@
 						}
 
 						$sqlselect = "SELECT * FROM fun;";
-
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
-
-						if (mysqli_num_rows($selected_posts) > 0) {
-							while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-								if (is_null($single_post['image'])) {
-									echo $single_post['text'] . "<br>";
-								}
-								else {
-									echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-									echo $single_post['text'] . "<br>";
-								}
-							}
-						}
+						postDownload($selected_posts);
 					}
 				}
 			}
@@ -151,37 +105,13 @@
 
 				if ($postcategory == "covid") {
 					$sqlselect = "SELECT * FROM covid;";
-
 					$selected_posts = mysqli_query($dbconnection, $sqlselect);
-
-					if (mysqli_num_rows($selected_posts) > 0) {
-						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-							if (is_null($single_post['image'])) {
-								echo $single_post['text'] . "<br>";
-							}
-							else {
-								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-								echo $single_post['text'] . "<br>";
-							}
-						}
-					}
+					postDownload($selected_posts);
 				}
 				if ($postcategory == "fun") {
 					$sqlselect = "SELECT * FROM fun;";
-
 					$selected_posts = mysqli_query($dbconnection, $sqlselect);
-
-					if (mysqli_num_rows($selected_posts) > 0) {
-						while ($single_post = mysqli_fetch_assoc($selected_posts)) {
-							if (is_null($single_post['image'])) {
-								echo $single_post['text'] . "<br>";
-							}
-							else {
-								echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-								echo $single_post['text'] . "<br>";
-							}
-						}
-					}
+					postDownload($selected_posts);
 				}
 			}
 

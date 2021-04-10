@@ -30,4 +30,18 @@
     }
   }
 
+  function postDownload($postsToDownload) {
+    if (mysqli_num_rows($postsToDownload) > 0) {
+      while ($single_post = mysqli_fetch_assoc($postsToDownload)) {
+        if (is_null($single_post['image'])) {
+          echo $single_post['text'] . "<br>";
+        }
+        else {
+          echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
+          echo $single_post['text'] . "<br>";
+        }
+      }
+    }
+  }
+
 ?>
