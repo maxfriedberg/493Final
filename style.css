@@ -21,4 +21,26 @@ img {
   margin: 3px 1px;
   cursor: pointer;
   outline: 1px solid black;
+  z-index: 2;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  background-color: #000080;
+  color: white;
+  z-index: 1;
+  display: table;
+}
+
+.createpostform {
+  margin-top: 75px;
 }

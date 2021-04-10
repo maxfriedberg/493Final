@@ -12,40 +12,41 @@
 	</head>
 	<body style="text-align:center">
 
-		<form method="post">
-        <input type="submit" name="selectcovidbutton"
-                value="COVID-Related" class="selectorbutton"/>
-								<span style="padding-left: 10px;padding-right: 10px;font-family: Helvetica, sans-serif;font-size:
-								24px;font-weight: bold;vertical-align: middle;">
-									Choose what type of posts you want to see</span>
-        <input type="submit" name="selectfunbutton"
-                value="Fun Posts" class="selectorbutton"/>
-    </form>
+		<div class="navbar">
+			<form method="post">
+	        <input type="submit" name="selectcovidbutton"
+	                value="COVID-Related" class="selectorbutton"/>
+									<span style="padding-left: 10px;padding-right: 10px;font-family: Helvetica, sans-serif;font-size:
+									24px;font-weight: bold;vertical-align: middle;z-index: 2;">
+										Choose what type of posts you want to see</span>
+	        <input type="submit" name="selectfunbutton"
+	                value="Fun Posts" class="selectorbutton"/>
+	    </form>
+		</div>
 
-		<br>
+		<div class="createpostform">
+			<form method="post" enctype="multipart/form-data">
+				Create Your Own Post!
+				<br>
+				<br>
+				<label for="category">Select Post Category </label>
+				<select id="category" name="category">
+	    		<option value="covid">COVID-Related</option>
+	    		<option value="fun">Fun Posts</option>
+	  		</select>
 
-		<form method="post" enctype="multipart/form-data">
-			Create Your Own Post!
-			<!-- <input type="text" name="text"> -->
-			<br>
-			<br>
-			<label for="category">Select Post Category </label>
-			<select id="category" name="category">
-    		<option value="covid">COVID-Related</option>
-    		<option value="fun">Fun Posts</option>
-  		</select>
+				Select Photo <input type="file" name="image">
+				<br>
 
-			Select Photo <input type="file" name="image">
-			<br>
+				<p class="intextalign">
+	  			<label for="textarea">Add Text </label>
+	  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
+				</p>
 
-			<p class="intextalign">
-  			<label for="textarea">Add Text </label>
-  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
-			</p>
-
-			<!-- the input button below is to finally/completely submit the post -->
-  		<input type="submit" name="createpost" value="Submit Post">
-		</form>
+				<!-- the input button below is to finally/completely submit the post -->
+	  		<input type="submit" name="createpost" value="Submit Post">
+			</form>
+		</div>
 
 		<br>
 
@@ -90,16 +91,8 @@
 				}
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
-				if (!empty($_FILES['image']['name'])) {
-					global $dir, $target, $size, $fileType, $badUpload;
-					$dir = "uploads/";
-					$target = $dir . basename($_FILES['image']['name']);
-					$size = $_FILES["image"]["size"];
-					$fileType = strtolower(pathinfo($target,PATHINFO_EXTENSION));
-				}
 				$fixed = str_replace("'", "''", $_POST['text']);
-				if (isset($_POST['category']) && $size <= 3000000 && ($fileType == "jpg" ||
-				$fileType == "png" || $fileType == "jpeg" || $fileType == "gif")) {
+				if (isset($_POST['category'])) {
 					$postcategory = $_POST['category'];
 					if ($postcategory == "covid") {
 
@@ -175,13 +168,6 @@
 							}
 						}
 					}
-				}
-				if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "gif") {
-					echo "<b> Error: Invalid File (Only JPG, JPEG, PNG, GIF Supported)</b><br><br>";
-
-				}
-				if ($size > 3000000) {
-					echo "<b> Error: File Must Be Less Than 3MB";
 				}
 			}
 			elseif (empty($_POST['text']) && isset($_POST['createpost'])) {
