@@ -1,27 +1,6 @@
-img {
-  width: 450px;
-  height: 300px;
-  object-fit: cover;
-}
-
-.intextalign * {
-  vertical-align: middle;
-}
-
-.selectorbutton {
-  background-color: #000080;
-  border: 5px solid #FFFF00;
-  color: white;
-  padding: 13px 28px;
+.fullsite {
   text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Helvetica, sans-serif;
-  margin: 3px 1px;
-  cursor: pointer;
-  outline: 1px solid black;
-  z-index: 2;
+  background-color: #B0C4DE;
 }
 
 .navbar {
@@ -41,6 +20,42 @@ img {
   display: table;
 }
 
+.selectorbutton {
+  background-color: #000080;
+  border: 5px solid #FFFF00;
+  color: white;
+  padding: 13px 28px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  margin: 3px 1px;
+  cursor: pointer;
+  outline: 1px solid black;
+  z-index: 2;
+}
+
+.navbarselectortext {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  vertical-align: middle;
+  z-index: 2;
+}
+
 .createpostform {
   margin-top: 75px;
+}
+
+.intextalign * {
+  vertical-align: middle;
+}
+
+img {
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
 }
