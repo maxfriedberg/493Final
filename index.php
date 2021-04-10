@@ -15,7 +15,9 @@
 		<form method="post">
         <input type="submit" name="selectcovidbutton"
                 value="COVID-Related" class="selectorbutton"/>
-								Choose what posts you want to see!
+								<span style="padding-left: 10px;padding-right: 10px;font-family: Helvetica, sans-serif;font-size:
+								24px;font-weight: bold;vertical-align: middle;">
+									Choose what type of posts you want to see</span>
         <input type="submit" name="selectfunbutton"
                 value="Fun Posts" class="selectorbutton"/>
     </form>
