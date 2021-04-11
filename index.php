@@ -31,14 +31,18 @@
 				<br>
 				<br>
 
-				<label for="category" class="createpostcategorytext">Select Post Category </label>
-					<select id="category" name="category" class="createpostcategorymenu">
-	    			<option value="covid">COVID-Related</option>
-	    			<option value="fun">Fun Posts</option>
-	  			</select>
+				<span class="createpostcategorycontainer">
+					<label for="category" class="createpostcategorytext">Select Post Category </label>
+						<select id="category" name="category" class="createpostcategorymenu">
+	    				<option value="covid">COVID-Related</option>
+	    				<option value="fun">Fun Posts</option>
+	  				</select>
+				</span>
 
-				<label for="fileUpload" class="createpostfiletext">Select photo </label>
-				<input id="fileUpload" type="file" name="image">
+				<span class="createpostfilecontainer">
+					<label for="fileUpload" class="createpostfiletext">Select photo </label>
+					<input id="fileUpload" type="file" name="image">
+				</span>
 
 				<br>
 

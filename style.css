@@ -68,6 +68,11 @@
   color: black;
 }
 
+.createpostcategorycontainer {
+  position: relative;
+  left: 18px;
+}
+
 .createpostcategorytext {
   font-family: Helvetica, sans-serif;
   font-size: 14.5px;
@@ -82,6 +87,11 @@
   border: 2px solid black;
   z-index: 0;
   color: black;
+}
+
+.createpostfilecontainer {
+  position: relative;
+  left: 42px;
 }
 
 .createpostfiletext {
@@ -110,7 +120,7 @@ input[type=file]::file-selector-button {
 
 .createposttextcontainer {
   position: relative;
-  right: 22px;
+  right: 24px;
 }
 
 .createposttextdisplay {
