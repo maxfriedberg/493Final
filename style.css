@@ -160,4 +160,5 @@ img {
   width: 450px;
   height: 300px;
   object-fit: cover;
+  border: 4px solid black;
 }

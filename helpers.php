@@ -38,7 +38,7 @@
         }
         else {
           echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-          echo $single_post['text'] . "<br>";
+          echo "<span style='margin-bottom: 5px;'>".$single_post['text']."</span>" . "<br>";
         }
       }
     }
