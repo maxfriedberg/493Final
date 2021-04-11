@@ -34,11 +34,11 @@
     if (mysqli_num_rows($postsToDownload) > 0) {
       while ($single_post = mysqli_fetch_assoc($postsToDownload)) {
         if (is_null($single_post['image'])) {
-          echo $single_post['text'] . "<br><br>";
+          echo "<figure><figcaption>" . $single_post['text'] . "</figcaption></figure>";
         }
         else {
-          echo "<img src='uploads/".$single_post['image']."' >" . "<br>";
-          echo "<span style='margin-bottom: 5px;'>".$single_post['text']."</span>" . "<br><br>";
+          echo "<figure><img src='uploads/".$single_post['image']."' >";
+          echo "<figcaption>" . $single_post['text'] . "</figcaption></figure>";
         }
       }
     }
