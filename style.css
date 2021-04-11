@@ -11,7 +11,8 @@
   right: 0;
   bottom: 0;
   height: 62px;
-  width: 920px;
+  width: 1025px;
+  border-radius: 22px;
   margin-left: auto;
   margin-right: auto;
   background-color: #000080;
@@ -22,7 +23,7 @@
 
 .selectorbutton {
   background-color: #000080;
-  border: 5px solid #FFFF00;
+  border: 3.5px solid #FFFF00;
   color: white;
   padding: 7px 13px;
   text-align: center;
@@ -60,11 +61,92 @@
   margin-top: 95px;
 }
 
+.createpostintrotext {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  z-index: 0;
+  color: black;
+}
+
+.createpostcategorytext {
+  font-family: Helvetica, sans-serif;
+  font-size: 14.5px;
+  z-index: 0;
+  color: black;
+}
+
+.createpostcategorymenu {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding: 3px;
+  border: 2px solid black;
+  z-index: 0;
+  color: black;
+}
+
+.createpostfiletext {
+  font-family: Helvetica, sans-serif;
+  font-size: 14.5px;
+  z-index: 0;
+  color: black;
+}
+
+input[type=file]::file-selector-button {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border: 2px solid black;
+  z-index: 0;
+  color: black;
+  background-color: white;
+}
+
 .intextalign * {
   vertical-align: middle;
 }
 
+.createposttextcontainer {
+  position: relative;
+  right: 22px;
+}
+
+.createposttextdisplay {
+  font-family: Helvetica, sans-serif;
+  font-size: 14.5px;
+  z-index: 0;
+  color: black;
+}
+
+.createposttextadd {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding: 3px;
+  border: 2px solid black;
+  z-index: 0;
+  color: black;
+}
+
+.createpostsubmitbutton {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border: 2px solid black;
+  z-index: 0;
+  color: black;
+  background-color: white;
+  position: relative;
+  top: -6.5px;
+}
+
 img {
+  position: relative;
+  left: 6.5px;
   width: 450px;
   height: 300px;
   object-fit: cover;

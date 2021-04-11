@@ -27,24 +27,29 @@
 
 		<div class="createpostform">
 			<form method="post" enctype="multipart/form-data">
-				Create Your Own Post!
+				<span class="createpostintrotext">Create your own post!</span>
 				<br>
 				<br>
-				<label for="category">Select Post Category </label>
-				<select id="category" name="category">
-	    		<option value="covid">COVID-Related</option>
-	    		<option value="fun">Fun Posts</option>
-	  		</select>
 
-				Select Photo <input type="file" name="image">
+				<label for="category" class="createpostcategorytext">Select Post Category </label>
+					<select id="category" name="category" class="createpostcategorymenu">
+	    			<option value="covid">COVID-Related</option>
+	    			<option value="fun">Fun Posts</option>
+	  			</select>
+
+				<label for="fileUpload" class="createpostfiletext">Select photo </label>
+				<input id="fileUpload" type="file" name="image">
+
 				<br>
 
 				<p class="intextalign">
-	  			<label for="textarea">Add Text </label>
-	  			<textarea id="textarea" name="text" rows="4" cols="50"></textarea>
+					<span class="createposttextcontainer">
+	  				<label for="textarea" class="createposttextdisplay">Add Text </label>
+	  				<textarea id="textarea" name="text" rows="4" cols="50" class="createposttextadd"></textarea>
+					</span>
 				</p>
 
-	  		<input type="submit" name="createpost" value="Submit Post">
+	  		<input type="submit" name="createpost" value="Submit Post" class="createpostsubmitbutton">
 			</form>
 		</div>
 
