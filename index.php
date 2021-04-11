@@ -57,11 +57,29 @@
 			</form>
 		</div>
 
+		<!-- Commented out code below is full HTML-side implementation of sidebar -->
+
+		<!--
+		<div class="sidebarcontainer">
+			<span class="sidebarintrotext">Helpful Links</span>
+			<br>
+			<br>
+			<a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank" class="sidebarlinkbutton">CDC COVID Info</a>
+			<br><br><br>
+			<a href="https://campusblueprint.umich.edu/dashboard/" target="_blank" class="sidebarlinkbutton">UM COVID Info</a>
+			<br><br><br>
+			<a href="https://uhs.umich.edu/covid-testing" target="_blank" class="sidebarlinkbutton">UHS COVID Testing</a>
+			<br><br><br>
+			<a href="https://www.washtenaw.org/3269/COVID-19-Vaccination" target="_blank" class="sidebarlinkbutton">Washtenaw Vaccinations</a>
+		</div>
+		-->
+
 		<br>
 
 		<?php
 
 			if (isset($_POST['selectcovidbutton'])) {
+				displaySidebar();
 				$sql = "SELECT * FROM covid;";
 				$selected_posts = mysqli_query($dbconnection, $sql);
 				postDownload($selected_posts);
@@ -85,6 +103,8 @@
 							$dest_file = "uploads/" . basename($_FILES['image']['name']);
 							postUpload($postcategory, TRUE, $fixed, $dbconnection, $image, $dest_file, $_FILES['image']['tmp_name']);
 						}
+
+						displaySidebar();
 
 						$sqlselect = "SELECT * FROM covid;";
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
@@ -114,6 +134,9 @@
 				$postcategory = $_POST['category'];
 
 				if ($postcategory == "covid") {
+
+					displaySidebar();
+
 					$sqlselect = "SELECT * FROM covid;";
 					$selected_posts = mysqli_query($dbconnection, $sqlselect);
 					postDownload($selected_posts);
