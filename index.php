@@ -80,14 +80,16 @@
 
 			if (isset($_POST['selectcovidbutton'])) {
 				displaySidebar();
-				$sql = "SELECT * FROM covid;";
-				$selected_posts = mysqli_query($dbconnection, $sql);
-				postDownload($selected_posts);
+				$sqlposts = "SELECT * FROM covid;";
+				$sqlcomments = "SELECT * FROM covidcomments;";
+				$selected_posts = mysqli_query($dbconnection, $sqlposts);
+				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+				postDownload($selected_posts, $selected_comments);
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sql = "SELECT * FROM fun;";
 				$selected_posts = mysqli_query($dbconnection, $sql);
-				postDownload($selected_posts);
+				postDownload($selected_posts, "");
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);
@@ -108,7 +110,7 @@
 
 						$sqlselect = "SELECT * FROM covid;";
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
-						postDownload($selected_posts);
+						postDownload($selected_posts, "");
 					}
 					if ($postcategory == "fun") {
 
@@ -123,7 +125,7 @@
 
 						$sqlselect = "SELECT * FROM fun;";
 						$selected_posts = mysqli_query($dbconnection, $sqlselect);
-						postDownload($selected_posts);
+						postDownload($selected_posts, "");
 					}
 				}
 			}
@@ -139,12 +141,12 @@
 
 					$sqlselect = "SELECT * FROM covid;";
 					$selected_posts = mysqli_query($dbconnection, $sqlselect);
-					postDownload($selected_posts);
+					postDownload($selected_posts, "");
 				}
 				if ($postcategory == "fun") {
 					$sqlselect = "SELECT * FROM fun;";
 					$selected_posts = mysqli_query($dbconnection, $sqlselect);
-					postDownload($selected_posts);
+					postDownload($selected_posts, "");
 				}
 			}
 

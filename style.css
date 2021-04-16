@@ -221,3 +221,25 @@ img {
   height: 300px;
   object-fit: cover;
 }
+
+.commentsintro {
+  color: black;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 14.5px;
+}
+
+.comments {
+  border: 2px black solid;
+  padding: 2.5px;
+  width: 450px;
+  margin-left: 400px;
+  margin-right: 500px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 11.5px;
+}
