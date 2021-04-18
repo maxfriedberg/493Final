@@ -34,26 +34,29 @@
     if (mysqli_num_rows($postsToDownload) > 0) {
       while ($single_post = mysqli_fetch_assoc($postsToDownload)) {
         if (is_null($single_post['image'])) {
-          echo "<figure><figcaption>" . $single_post['text'] . "</figcaption></figure>";
+          echo "<figure><figcaption>" . $single_post['text'] . "</figcaption>";
         }
         else {
-          echo "<figure><img src='uploads/".$single_post['image']."' >";
-          echo "<figcaption>" . $single_post['text'] . "</figcaption></figure>";
+          echo "<figure><figcaption>" . $single_post['text'] . "</figcaption>";
+          echo "<img src='uploads/".$single_post['image']."' >";
         }
         $post_postid = $single_post['postid'];
         $comment_found = FALSE;
-        echo "<span class='commentsintro'>Comments</span><br><br>";
+        echo "<div class='commentsintro'>Comments</div>";
         if (mysqli_num_rows($commentsToDownload) > 0) {
           while ($single_comment = mysqli_fetch_assoc($commentsToDownload)) {
             $comment_postid = $single_comment['postid'];
             if ($post_postid == $comment_postid) {
               $comment_found = TRUE;
-              echo "<span class='comments'>" . $single_comment['text'] . "</span><br>";
+              echo "<figcaption><span class='comments'>" . $single_comment['text'] . "</span></figcaption>";
             }
           }
-          if ($comment_found == TRUE) {
-            echo "<br><br>";
-          }
+        }
+        echo "<form><textarea name='commenttext' rows='3' cols='50' class='commentadd'>Add a comment!</textarea><br>";
+        echo "<input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton'></form>";
+        echo "</figure>";
+        if ($comment_found == TRUE) {
+          echo "<br><br>";
         }
       }
     }

@@ -212,7 +212,8 @@ figcaption {
   padding: 2px;
   text-align: center;
   font-family: Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 15.5px;
+  margin-bottom: 2px;
 }
 
 img {
@@ -223,23 +224,22 @@ img {
 }
 
 .commentsintro {
-  color: black;
-  text-align: center;
+  border: 1px solid black;
   font-family: Helvetica, sans-serif;
   font-size: 14.5px;
+  margin-bottom: 3.5px;
 }
 
 .comments {
-  border: 2px black solid;
-  padding: 2.5px;
-  width: 450px;
-  margin-left: 400px;
-  margin-right: 500px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  background-color: white;
-  color: black;
-  text-align: center;
   font-family: Helvetica, sans-serif;
-  font-size: 11.5px;
+  font-size: 12.75px;
+}
+
+.commentadd {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding: 2px;
+  border: 0.75px solid black;
+  margin-bottom: 3px;
+  margin-top: 2.5px;
 }
