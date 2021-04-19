@@ -67,20 +67,9 @@
 				$sqlcomments = "SELECT * FROM covidcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
 				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-				//code needed
-
 				postDownload($selected_posts, $selected_comments, "covid");
-
-				if (isset($_POST['createcomment'])) {
-
-					displaySidebar();
-
-					$sqlposts = "SELECT * FROM covid;";
-					$sqlcomments = "SELECT * FROM covidcomments;";
-					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "covid");
-				}
+				//line below if for testing purposes (remove later)
+				displayCovidComments($dbconnection);
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sqlposts = "SELECT * FROM fun;";
@@ -88,6 +77,8 @@
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
 				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
 				postDownload($selected_posts, $selected_comments, "fun");
+				//line below if for testing purposes (remove later)
+				displayFunComments($dbconnection);
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);

@@ -41,8 +41,8 @@
           echo "<img src='uploads/".$single_post['image']."' >";
         }
         $post_postid = $single_post['postid'];
-        $comment_found = FALSE;
         echo "<div class='commentsintro'>Comments</div>";
+        //---------------- cutoff point -----------------------------------------------
         if (mysqli_num_rows($commentsToDownload) > 0) {
           while ($single_comment = mysqli_fetch_assoc($commentsToDownload)) {
             $comment_postid = $single_comment['postid'];
@@ -56,10 +56,8 @@
         echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
         echo "<input type='hidden' id='postID' name='commentPostID' value='".$post_postid."'>";
         echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='".$selectedCategory."'>";
-        echo "</form></figure>";
-        if ($comment_found == TRUE) {
-          echo "<br><br>";
-        }
+        echo "</form></figure><br><br>";
+        //---------------- cutoff point -----------------------------------------------
       }
     }
   }
@@ -80,12 +78,30 @@
 
   function commentUpload($commentCategory, $commentText, $postID, $uploadDB) {
     if ($commentCategory == 'covid') {
-      $sqlinsert = "INSERT INTO covidcomments (text, postid, commentid) VALUES ('$commentText', '$postID', NULL);";
+      $sqlinsert = "INSERT INTO covidcomments (text, postid) VALUES ('$commentText', '$postID');";
       mysqli_query($uploadDB, $sqlinsert);
     }
     else {
-      $sqlinsert = "INSERT INTO funcomments (text, postid, commentid) VALUES ('$commentText', '$postID', NULL);";
+      $sqlinsert = "INSERT INTO funcomments (text, postid) VALUES ('$commentText', '$postID');";
       mysqli_query($uploadDB, $sqlinsert);
+    }
+  }
+
+  function displayCovidComments($uploadDB) {
+    $sqlcomments = "SELECT * FROM covidcomments;";
+    $selected_comments = mysqli_query($uploadDB, $sqlcomments);
+    while ($comment = mysqli_fetch_assoc($selected_comments)) {
+      echo $comment['text'] . ": " . $comment['postid'] . "<br>";
+      echo "(COVID-Related)<br>";
+    }
+  }
+
+  function displayFunComments($uploadDB) {
+    $sqlcomments = "SELECT * FROM funcomments;";
+    $selected_comments = mysqli_query($uploadDB, $sqlcomments);
+    while ($comment = mysqli_fetch_assoc($selected_comments)) {
+      echo $comment['text'] . ": " . $comment['postid'] . "<br>";
+      echo "(FUN-Related)<br>";
     }
   }
 
