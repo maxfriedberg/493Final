@@ -30,6 +30,34 @@
     }
   }
 
+  function commentDownload($postsPostID, $commentsPostID, $commentsText) {
+    if ($postsPostID == $commentsPostID) {
+      echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $commentsText . "</span></figcaption>";
+    }
+  }
+
+  function postDownload($currentPostText, $currentPostImage, $currentSelectedComments, $currentPostsPostID, $currentPostCategory) {
+    if (!empty($currentPostImage)) {
+      echo "<figure><figcaption>" . $currentPostText . "</figcaption>";
+    }
+    else {
+      echo "<figure><figcaption>" . $currentPostText . "</figcaption>";
+      echo "<img src='uploads/".$currentPostImage."' >";
+    }
+    echo "<div class='commentsintro'>Comments</div>";
+    if (mysqli_num_rows($currentSelectedComments) > 0) {
+      while ($comment = mysqli_fetch_assoc($currentSelectedComments)) {
+        commentDownload($currentPostsPostID, $comment['postid'], $comment['text']);
+      }
+    }
+    echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+    echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+    echo "<input type='hidden' id='postID' name='commentPostID' value='".$currentPostsPostID."'>";
+    echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='".$currentPostCategory."'>";
+    echo "</form></figure><br><br>";
+  }
+
+  /*
   function postDownload($postsToDownload, $commentsToDownload, $selectedCategory) {
     if (mysqli_num_rows($postsToDownload) > 0) {
       while ($single_post = mysqli_fetch_assoc($postsToDownload)) {
@@ -45,22 +73,23 @@
         //---------------- cutoff point -----------------------------------------------
         if (mysqli_num_rows($commentsToDownload) > 0) {
           while ($single_comment = mysqli_fetch_assoc($commentsToDownload)) {
-            $comment_postid = $single_comment['postid'];
-            if ($post_postid == $comment_postid) {
-              $comment_found = TRUE;
-              echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $single_comment['text'] . "</span></figcaption>";
-            }
+            //$comment_postid = $single_comment['postid'];
+            //if ($post_postid == $comment_postid) {
+              //$comment_found = TRUE;
+              //echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $single_comment['text'] . "</span></figcaption>";
+            //}
           }
         }
+        //---------------- cutoff point -----------------------------------------------
         echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
         echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
         echo "<input type='hidden' id='postID' name='commentPostID' value='".$post_postid."'>";
         echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='".$selectedCategory."'>";
         echo "</form></figure><br><br>";
-        //---------------- cutoff point -----------------------------------------------
       }
     }
   }
+  */
 
   function displaySidebar() {
     echo "<div class='sidebarcontainer'>";

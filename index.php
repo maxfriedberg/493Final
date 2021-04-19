@@ -64,21 +64,44 @@
 			if (isset($_POST['selectcovidbutton'])) {
 				displaySidebar();
 				$sqlposts = "SELECT * FROM covid;";
-				$sqlcomments = "SELECT * FROM covidcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
-				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-				postDownload($selected_posts, $selected_comments, "covid");
-				//line below if for testing purposes (remove later)
-				displayCovidComments($dbconnection);
+
+				while ($post = mysqli_fetch_assoc($selected_posts)) {
+					if (is_null($post['image'])) {
+			      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+			    }
+			    else {
+			      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+			      echo "<img src='uploads/".$post['image']."' >";
+			    }
+
+			    echo "<div class='commentsintro'>Comments</div>";
+
+					$currentPostID = $post['postid'];
+					$sqlcomments = "SELECT * FROM covidcomments WHERE postid='".$currentPostID."';";
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+					while ($comment = mysqli_fetch_assoc($selected_comments)) {
+						echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+					}
+
+					mysqli_free_result($selected_comments);
+
+					echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+	        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+	        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+	        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='covid'>";
+	        echo "</form></figure><br><br>";
+	      }
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sqlposts = "SELECT * FROM fun;";
 				$sqlcomments = "SELECT * FROM funcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
 				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-				postDownload($selected_posts, $selected_comments, "fun");
-				//line below if for testing purposes (remove later)
-				displayFunComments($dbconnection);
+				while ($post = mysqli_fetch_assoc($selected_posts)) {
+					postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+	      }
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);
@@ -101,7 +124,9 @@
 						$sqlcomments = "SELECT * FROM covidcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
 						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-						postDownload($selected_posts, $selected_comments, "covid");
+						while ($post = mysqli_fetch_assoc($selected_posts)) {
+							postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+			      }
 					}
 					if ($postcategory == "fun") {
 
@@ -118,7 +143,9 @@
 						$sqlcomments = "SELECT * FROM funcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
 						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-						postDownload($selected_posts, $selected_comments, "fun");
+						while ($post = mysqli_fetch_assoc($selected_posts)) {
+							postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+			      }
 					}
 				}
 			}
@@ -136,14 +163,18 @@
 					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "covid");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+		      }
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
 					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "fun");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+		      }
 				}
 			}
 			if (!empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
@@ -162,14 +193,18 @@
 					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "covid");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+		      }
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
 					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "fun");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+		      }
 				}
 			}
 			elseif (empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
@@ -186,14 +221,18 @@
 					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "covid");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+		      }
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
 					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments, "fun");
+					while ($post = mysqli_fetch_assoc($selected_posts)) {
+						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+		      }
 				}
 			}
 
