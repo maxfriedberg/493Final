@@ -212,8 +212,10 @@ figcaption {
   padding: 2px;
   text-align: center;
   font-family: Helvetica, sans-serif;
-  font-size: 15.5px;
+  font-size: 17px;
+  font-weight: bold;
   margin-bottom: 2px;
+  word-wrap: break-word;
 }
 
 img {
@@ -228,6 +230,7 @@ img {
   font-family: Helvetica, sans-serif;
   font-size: 14.5px;
   margin-bottom: 3.5px;
+  font-weight: bold;
 }
 
 .comments {
@@ -242,4 +245,6 @@ img {
   border: 0.75px solid black;
   margin-bottom: 3px;
   margin-top: 2.5px;
+  background-color: #E0E0E0;
+  resize: none;
 }

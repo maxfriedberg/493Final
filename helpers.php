@@ -48,12 +48,12 @@
             $comment_postid = $single_comment['postid'];
             if ($post_postid == $comment_postid) {
               $comment_found = TRUE;
-              echo "<figcaption><span class='comments'>" . $single_comment['text'] . "</span></figcaption>";
+              echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $single_comment['text'] . "</span></figcaption>";
             }
           }
         }
-        echo "<form><textarea name='commenttext' rows='3' cols='50' class='commentadd'>Add a comment!</textarea><br>";
-        echo "<input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton'></form>";
+        echo "<br><form><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'></form>";
         echo "</figure>";
         if ($comment_found == TRUE) {
           echo "<br><br>";
@@ -74,6 +74,17 @@
       echo "<br><br><br>";
       echo "<a href='https://www.washtenaw.org/3269/COVID-19-Vaccination' target='_blank' class='sidebarlinkbutton'>Washtenaw Vaccinations</a>";
     echo "</div>";
+  }
+
+  function commentUpload($commentCategory, $commentText, $postID) {
+    if ($commentCategory == 'covid') {
+      $sqlinsert = "INSERT INTO covidcomments (text, postid, commentid) VALUES ('$commentText', '$postID', NULL);";
+      mysqli_query($uploadDB, $sqlinsert);
+    }
+    else {
+      $sqlinsert = "INSERT INTO funcomments (text, postid, commentid) VALUES ('$commentText', '$postID', NULL);";
+      mysqli_query($uploadDB, $sqlinsert);
+    }
   }
 
 ?>
