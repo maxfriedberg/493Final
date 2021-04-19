@@ -95,12 +95,36 @@
 	      }
 			}
 			if (isset($_POST['selectfunbutton'])) {
+				displaySidebar();
 				$sqlposts = "SELECT * FROM fun;";
-				$sqlcomments = "SELECT * FROM funcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
-				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 				while ($post = mysqli_fetch_assoc($selected_posts)) {
-					postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
+					if (is_null($post['image'])) {
+			      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+			    }
+			    else {
+			      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+			      echo "<img src='uploads/".$post['image']."' >";
+			    }
+
+			    echo "<div class='commentsintro'>Comments</div>";
+
+					$currentPostID = $post['postid'];
+					$sqlcomments = "SELECT * FROM funcomments WHERE postid='".$currentPostID."';";
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+					while ($comment = mysqli_fetch_assoc($selected_comments)) {
+						echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+					}
+
+					mysqli_free_result($selected_comments);
+
+					echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+	        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+	        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+	        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='fun'>";
+	        echo "</form></figure><br><br>";
 	      }
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
@@ -121,11 +145,34 @@
 						displaySidebar();
 
 						$sqlposts = "SELECT * FROM covid;";
-						$sqlcomments = "SELECT * FROM covidcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
-						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 						while ($post = mysqli_fetch_assoc($selected_posts)) {
-							postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+							if (is_null($post['image'])) {
+					      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+					    }
+					    else {
+					      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+					      echo "<img src='uploads/".$post['image']."' >";
+					    }
+
+					    echo "<div class='commentsintro'>Comments</div>";
+
+							$currentPostID = $post['postid'];
+							$sqlcomments = "SELECT * FROM covidcomments WHERE postid='".$currentPostID."';";
+							$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+							while ($comment = mysqli_fetch_assoc($selected_comments)) {
+								echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+							}
+
+							mysqli_free_result($selected_comments);
+
+							echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+			        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+			        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+			        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='covid'>";
+			        echo "</form></figure><br><br>";
 			      }
 					}
 					if ($postcategory == "fun") {
@@ -140,12 +187,35 @@
 						}
 
 						$sqlposts = "SELECT * FROM fun;";
-						$sqlcomments = "SELECT * FROM funcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
-						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 						while ($post = mysqli_fetch_assoc($selected_posts)) {
-							postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
-			      }
+							if (is_null($post['image'])) {
+					      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+					    }
+					    else {
+					      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+					      echo "<img src='uploads/".$post['image']."' >";
+					    }
+
+					    echo "<div class='commentsintro'>Comments</div>";
+
+							$currentPostID = $post['postid'];
+							$sqlcomments = "SELECT * FROM funcomments WHERE postid='".$currentPostID."';";
+							$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+							while ($comment = mysqli_fetch_assoc($selected_comments)) {
+								echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+							}
+
+							mysqli_free_result($selected_comments);
+
+							echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+			        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+			        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+			        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='fun'>";
+			        echo "</form></figure><br><br>";
+						}
 					}
 				}
 			}
@@ -160,21 +230,67 @@
 					displaySidebar();
 
 					$sqlposts = "SELECT * FROM covid;";
-					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
-		      }
+						if (is_null($post['image'])) {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+						}
+						else {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+							echo "<img src='uploads/".$post['image']."' >";
+						}
+
+						echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM covidcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+						echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+						echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+						echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='covid'>";
+						echo "</form></figure><br><br>";
+					}
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
-					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
-		      }
+						if (is_null($post['image'])) {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+						}
+						else {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+							echo "<img src='uploads/".$post['image']."' >";
+						}
+
+						echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM funcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+						echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+						echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+						echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='fun'>";
+						echo "</form></figure><br><br>";
+					}
 				}
 			}
 			if (!empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
@@ -190,21 +306,67 @@
 					displaySidebar();
 
 					$sqlposts = "SELECT * FROM covid;";
-					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+						if (is_null($post['image'])) {
+				      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+				    }
+				    else {
+				      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+				      echo "<img src='uploads/".$post['image']."' >";
+				    }
+
+				    echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM covidcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+		        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+		        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+		        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='covid'>";
+		        echo "</form></figure><br><br>";
 		      }
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
-					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
-		      }
+						if (is_null($post['image'])) {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+						}
+						else {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+							echo "<img src='uploads/".$post['image']."' >";
+						}
+
+						echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM funcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+						echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+						echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+						echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='fun'>";
+						echo "</form></figure><br><br>";
+					}
 				}
 			}
 			elseif (empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
@@ -218,21 +380,67 @@
 					displaySidebar();
 
 					$sqlposts = "SELECT * FROM covid;";
-					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "covid");
+						if (is_null($post['image'])) {
+				      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+				    }
+				    else {
+				      echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+				      echo "<img src='uploads/".$post['image']."' >";
+				    }
+
+				    echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM covidcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+		        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+		        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+		        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='covid'>";
+		        echo "</form></figure><br><br>";
 		      }
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
-					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
-					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
 					while ($post = mysqli_fetch_assoc($selected_posts)) {
-						postDownload($post['text'], $post['image'], $selected_comments, $post['postid'], "fun");
-		      }
+						if (is_null($post['image'])) {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+						}
+						else {
+							echo "<figure><figcaption>" . $post['text'] . "</figcaption>";
+							echo "<img src='uploads/".$post['image']."' >";
+						}
+
+						echo "<div class='commentsintro'>Comments</div>";
+
+						$currentPostID = $post['postid'];
+						$sqlcomments = "SELECT * FROM funcomments WHERE postid='".$currentPostID."';";
+						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+
+						while ($comment = mysqli_fetch_assoc($selected_comments)) {
+							echo "<figcaption><span class='comments' style='font-weight: normal;'>" . $comment['text'] . "</span></figcaption>";
+						}
+
+						mysqli_free_result($selected_comments);
+
+						echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+						echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+						echo "<input type='hidden' id='postID' name='commentPostID' value='".$post['postid']."'>";
+						echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='fun'>";
+						echo "</form></figure><br><br>";
+					}
 				}
 			}
 
