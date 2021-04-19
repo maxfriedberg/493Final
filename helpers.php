@@ -30,7 +30,7 @@
     }
   }
 
-  function postDownload($postsToDownload, $commentsToDownload) {
+  function postDownload($postsToDownload, $commentsToDownload, $selectedCategory) {
     if (mysqli_num_rows($postsToDownload) > 0) {
       while ($single_post = mysqli_fetch_assoc($postsToDownload)) {
         if (is_null($single_post['image'])) {
@@ -52,9 +52,11 @@
             }
           }
         }
-        echo "<br><form><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
-        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'></form>";
-        echo "</figure>";
+        echo "<br><form method='post'><textarea name='commenttext' rows='3' cols='64' class='commentadd'>Add a comment!</textarea><br>";
+        echo "<br><input type='submit' name='createcomment' value='Submit Comment' class='createpostsubmitbutton' style='background-color: #E0E0E0;'>";
+        echo "<input type='hidden' id='postID' name='commentPostID' value='".$post_postid."'>";
+        echo "<input type='hidden' id='postCategory' name='commentPostCategory' value='".$selectedCategory."'>";
+        echo "</form></figure>";
         if ($comment_found == TRUE) {
           echo "<br><br>";
         }
@@ -76,7 +78,7 @@
     echo "</div>";
   }
 
-  function commentUpload($commentCategory, $commentText, $postID) {
+  function commentUpload($commentCategory, $commentText, $postID, $uploadDB) {
     if ($commentCategory == 'covid') {
       $sqlinsert = "INSERT INTO covidcomments (text, postid, commentid) VALUES ('$commentText', '$postID', NULL);";
       mysqli_query($uploadDB, $sqlinsert);

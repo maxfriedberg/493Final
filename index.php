@@ -57,23 +57,6 @@
 			</form>
 		</div>
 
-		<!-- Commented out code below is full HTML-side implementation of sidebar -->
-
-		<!--
-		<div class="sidebarcontainer">
-			<span class="sidebarintrotext">Helpful Links</span>
-			<br>
-			<br>
-			<a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank" class="sidebarlinkbutton">CDC COVID Info</a>
-			<br><br><br>
-			<a href="https://campusblueprint.umich.edu/dashboard/" target="_blank" class="sidebarlinkbutton">UM COVID Info</a>
-			<br><br><br>
-			<a href="https://uhs.umich.edu/covid-testing" target="_blank" class="sidebarlinkbutton">UHS COVID Testing</a>
-			<br><br><br>
-			<a href="https://www.washtenaw.org/3269/COVID-19-Vaccination" target="_blank" class="sidebarlinkbutton">Washtenaw Vaccinations</a>
-		</div>
-		-->
-
 		<br>
 
 		<?php
@@ -84,14 +67,27 @@
 				$sqlcomments = "SELECT * FROM covidcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
 				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-				postDownload($selected_posts, $selected_comments);
+				//code needed
+
+				postDownload($selected_posts, $selected_comments, "covid");
+
+				if (isset($_POST['createcomment'])) {
+
+					displaySidebar();
+
+					$sqlposts = "SELECT * FROM covid;";
+					$sqlcomments = "SELECT * FROM covidcomments;";
+					$selected_posts = mysqli_query($dbconnection, $sqlposts);
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+					postDownload($selected_posts, $selected_comments, "covid");
+				}
 			}
 			if (isset($_POST['selectfunbutton'])) {
 				$sqlposts = "SELECT * FROM fun;";
 				$sqlcomments = "SELECT * FROM funcomments;";
 				$selected_posts = mysqli_query($dbconnection, $sqlposts);
 				$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-				postDownload($selected_posts, $selected_comments);
+				postDownload($selected_posts, $selected_comments, "fun");
 			}
 			if (!empty($_POST['text']) && isset($_POST['createpost'])) {
 				$fixed = str_replace("'", "''", $_POST['text']);
@@ -114,7 +110,7 @@
 						$sqlcomments = "SELECT * FROM covidcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
 						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-						postDownload($selected_posts, $selected_comments);
+						postDownload($selected_posts, $selected_comments, "covid");
 					}
 					if ($postcategory == "fun") {
 
@@ -131,7 +127,7 @@
 						$sqlcomments = "SELECT * FROM funcomments;";
 						$selected_posts = mysqli_query($dbconnection, $sqlposts);
 						$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-						postDownload($selected_posts, $selected_comments);
+						postDownload($selected_posts, $selected_comments, "fun");
 					}
 				}
 			}
@@ -149,16 +145,67 @@
 					$sqlcomments = "SELECT * FROM covidcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments);
+					postDownload($selected_posts, $selected_comments, "covid");
 				}
 				if ($postcategory == "fun") {
 					$sqlposts = "SELECT * FROM fun;";
 					$sqlcomments = "SELECT * FROM funcomments;";
 					$selected_posts = mysqli_query($dbconnection, $sqlposts);
 					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
-					postDownload($selected_posts, $selected_comments);
+					postDownload($selected_posts, $selected_comments, "fun");
 				}
 			}
+			if (!empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
+				$comment_text = str_replace("'", "''", $_POST['commenttext']);
+				$comment_postID = $_POST['commentPostID'];
+				$comment_category = $_POST['commentPostCategory'];
+				commentUpload($comment_category, $comment_text, $comment_postID, $dbconnection);
+
+				$postcategory = $_POST['commentPostCategory'];
+
+				if ($postcategory == "covid") {
+
+					displaySidebar();
+
+					$sqlposts = "SELECT * FROM covid;";
+					$sqlcomments = "SELECT * FROM covidcomments;";
+					$selected_posts = mysqli_query($dbconnection, $sqlposts);
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+					postDownload($selected_posts, $selected_comments, "covid");
+				}
+				if ($postcategory == "fun") {
+					$sqlposts = "SELECT * FROM fun;";
+					$sqlcomments = "SELECT * FROM funcomments;";
+					$selected_posts = mysqli_query($dbconnection, $sqlposts);
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+					postDownload($selected_posts, $selected_comments, "fun");
+				}
+			}
+			elseif (empty($_POST['commenttext']) && isset($_POST['createcomment'])) {
+
+				echo "<b> Error: Text is required to comment</b><br><br>";
+
+				$postcategory = $_POST['commentPostCategory'];
+
+				if ($postcategory == "covid") {
+
+					displaySidebar();
+
+					$sqlposts = "SELECT * FROM covid;";
+					$sqlcomments = "SELECT * FROM covidcomments;";
+					$selected_posts = mysqli_query($dbconnection, $sqlposts);
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+					postDownload($selected_posts, $selected_comments, "covid");
+				}
+				if ($postcategory == "fun") {
+					$sqlposts = "SELECT * FROM fun;";
+					$sqlcomments = "SELECT * FROM funcomments;";
+					$selected_posts = mysqli_query($dbconnection, $sqlposts);
+					$selected_comments = mysqli_query($dbconnection, $sqlcomments);
+					postDownload($selected_posts, $selected_comments, "fun");
+				}
+			}
+
 
 		?>
 
