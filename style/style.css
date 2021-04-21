@@ -1,0 +1,126 @@
+body {
+	font-family: Roboto;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.header {
+	background-color: #1e15fb;
+	border: 2px solid #157ffb;
+	position: fixed;
+	height: 75px;
+	width: 100%;
+	top: 0;
+}
+
+.header p {
+	margin-top: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #f5f5f5;
+	font-size: 16pt;
+}
+
+.row {
+	position: fixed;
+	margin-left: 350px;
+	margin-top: -50px;
+	top: 135px;
+}
+
+.sidebar {
+	position: fixed;
+	float: left;
+	margin-left: 5px;
+	margin-top: -70px
+	border: 1px solid gray;
+	width: 305px;
+	height: 497px;
+	background-color: #eeeeee;
+	bottom: 2.5px;
+}
+
+.sidebar a {
+	font-size: 10pt;
+}
+
+.testing_links {
+	margin-left: 5px;
+}
+
+.vaccine_links {
+	margin-left: 5px;
+}
+
+figure {
+  border: 2px black solid;
+  padding: 2.5px;
+  width: 460px;
+	margin: auto;
+	z-index: -1;
+}
+
+figcaption {
+	border: 1.25px black solid;
+  background-color: white;
+  color: black;
+  padding: 2px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+	z-index: -1;
+}
+
+img {
+  position: relative;
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
+	z-index: -1;
+}
+
+.submissions {
+	margin-top: 17px;
+	float:left;
+	margin-left: 575px;
+	right: 10px;
+}
+
+.commentsintro {
+  font-size: 14.5px;
+  margin-bottom: 3.5px;
+  font-weight: bold;
+	text-decoration: underline;
+}
+
+.comments {
+  font-size: 12.75px;
+}
+
+.commentadd {
+  font-size: 12px;
+  padding: 2px;
+  border: 0.75px solid black;
+  margin-bottom: 3px;
+  margin-top: 2.5px;
+  background-color: #E0E0E0;
+  resize: none;
+}
+
+.createpostsubmitbutton {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border: 0.75px solid black;
+  z-index: 0;
+  color: black;
+  background-color: white;
+  position: relative;
+  top: -6.5px;
+}
